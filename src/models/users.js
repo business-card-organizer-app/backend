@@ -21,6 +21,15 @@ module.exports = {
         }
     },
 
+    validatePhone(phone) {
+        return db('users')
+            .where({
+                phone
+            })
+            .first()
+            .then(ids => Object.keys(ids).length ? ids : null)
+    },
+
     addUser(user) {
         return db('users')
             .insert(user)
