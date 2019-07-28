@@ -7,7 +7,7 @@ module.exports = {
                 email
             })
             .first()
-            .then(ids => Object.keys(ids).length ? ids : null)
+            .then(ids => ids ? ids : null)
     },
 
     getUser(id) {
@@ -17,7 +17,7 @@ module.exports = {
                     id
                 })
                 .first()
-                .then(ids => Object.keys(ids).length ? ids : null)
+                .then(ids => ids ? ids : null)
         }
     },
 
@@ -27,13 +27,26 @@ module.exports = {
                 phone
             })
             .first()
-            .then(ids => Object.keys(ids).length ? ids : null)
+            .then(ids => ids ? ids : null)
     },
 
     addUser(user) {
+        const {
+            first_name,
+            last_name,
+            email,
+            phone
+        } = user
+        const users = {
+            first_name,
+            last_name,
+            email,
+            phone
+        }
         return db('users')
             .insert(user)
-            .then(([id]) => id ? this.getUser(id) : null)
+            .returning('id')
+            .then(() => users)
     }
 
 }

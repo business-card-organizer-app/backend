@@ -12,11 +12,5 @@ server.use(cors());
 server.use(express.json())
 server.use(userRoute);
 
-function error(err, req, res, next) {
-    console.log(err)
-    res.status(500).json(err)
-};
-
-server.use(error);
 
 module.exports = server;

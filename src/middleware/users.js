@@ -9,13 +9,12 @@ module.exports = {
             phone
         } = req.body;
         try {
-            console.log(email)
-            const user = await Users.findUser(email);
-            console.log(user)
-            if (!user && !await Users.validatePhone(phone)) {
-                return next()
+            const useremail = await Users.findUser(email);
+            const userphone = await Users.validatePhone(phone)
+            if (useremail || userphone) {
+                return response.errorHelper(res, 400, 'User already exists')
             }
-            return response.errorHelper(res, 400, 'User already exists')
+            next()
         } catch (error) {
             next({
                 message: 'Error validating if user exists'
