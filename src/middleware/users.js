@@ -43,5 +43,20 @@ module.exports = {
             return response.errorHelper(res, 400, 'Input a valid phone number')
         }
         next()
+    },
+
+    async validateLogin(req, res, next) {
+        const {
+            body
+        } = req;
+        const hasRequiredField = 'email' && 'password' in body;
+        if (!hasRequiredField) {
+            return response.errorHelper(res, 400, 'email and password are required')
+        }
+        const email = validator.isEmail(body.email);
+        if (!email) {
+            return response.errorHelper(res, 400, 'Invalid email type');
+        }
+        next()
     }
 }
