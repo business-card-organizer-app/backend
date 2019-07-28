@@ -1,15 +1,14 @@
 // Update with your config settings.
-const dotenv = require('dotenv');
+const secret = require('./config/secrets');
 
-dotenv.config()
 module.exports = {
 
   development: {
     client: 'pg',
     connection: {
       host: '127.0.0.1',
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      user: secret.dbUsername,
+      password: secret.dbPassword,
       database: 'bussiness-card-app',
       charset: 'utf8'
     },
