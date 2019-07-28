@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "test-coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/business-card-organizer-app/backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/business-card-organizer-app/backend/issues"
+  },
+  "homepage": "https://github.com/business-card-organizer-app/backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "helmet": "^3.20.0",
+    "jest": "^24.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "pg": "^7.12.0",
+    "supertest": "^4.0.2",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
+}
