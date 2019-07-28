@@ -2,7 +2,7 @@ module.exports = {
     successHelper(res, status, data) {
         return res.status(status).json({
             status,
-            data
+            data: [data]
         })
     },
 
