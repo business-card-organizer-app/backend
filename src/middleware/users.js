@@ -58,5 +58,17 @@ module.exports = {
             return response.errorHelper(res, 400, 'Invalid email type');
         }
         next()
+    },
+
+    async validateId(req, res, next) {
+        const {
+            id
+        } = req.params;
+        if (!id) {
+            return response.errorHelper(res, 400, 'Id is needed')
+        } else if (!Number(id)) {
+            return response.errorHelper(res, 400, 'Invalid id type')
+        }
+        next()
     }
 }
