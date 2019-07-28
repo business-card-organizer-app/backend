@@ -56,5 +56,35 @@ module.exports = {
                 message: 'Error login users try again'
             })
         }
+    },
+
+    async getUser(req, res, next) {
+        const {
+            id
+        } = req.params;
+        try {
+            const user = await Users.getUser(id);
+            if (!user) {
+                return response.errorHelper(res, 404, 'You are not a User')
+            }
+            const {
+                first_name,
+                last_name,
+                email,
+                phone
+            } = user
+            res.status(200).json({
+                status: 200,
+                data: [{
+                    id,
+                    first_name,
+                    last_name,
+                    email,
+                    phone
+                }]
+            })
+        } catch (error) {
+
+        }
     }
 }
