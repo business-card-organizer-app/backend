@@ -20,6 +20,7 @@ module.exports = {
       directory: './data/seeds'
     }
   },
+
   testing: {
     client: 'pg',
     connection: {
