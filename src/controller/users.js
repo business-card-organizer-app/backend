@@ -13,7 +13,21 @@ module.exports = {
             return response.successHelper(res, 201, user)
         } catch (error) {
             next({
-                message: 'Error adding users tryagain'
+                message: 'Error adding users try again'
+            })
+        }
+    },
+
+    async Login(req, res, next) {
+        const {
+            body
+        } = req;
+        try {
+            const user = await Users.findUser(body.email)
+            console.log(user)
+        } catch (error) {
+            next({
+                message: 'Error login users try again'
             })
         }
     }
