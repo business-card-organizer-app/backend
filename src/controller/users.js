@@ -45,12 +45,7 @@ module.exports = {
                 phone,
                 token
             }
-            res.status(200).json({
-                status: 200,
-                data: [
-                    users
-                ]
-            })
+            return response.successHelper(res, 200, users)
         } catch (error) {
             next({
                 message: 'Error login users try again'
@@ -73,15 +68,12 @@ module.exports = {
                 email,
                 phone
             } = user
-            res.status(200).json({
-                status: 200,
-                data: [{
-                    id,
-                    first_name,
-                    last_name,
-                    email,
-                    phone
-                }]
+            return response.successHelper(res, 200, {
+                id,
+                first_name,
+                last_name,
+                email,
+                phone
             })
         } catch (error) {
 
