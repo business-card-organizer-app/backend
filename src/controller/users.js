@@ -76,7 +76,9 @@ module.exports = {
                 phone
             })
         } catch (error) {
-
+            next({
+                message: 'Error cannot get user'
+            })
         }
     }
 }
