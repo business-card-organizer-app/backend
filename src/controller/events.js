@@ -63,5 +63,22 @@ module.exports = {
                 message: "Error updating event"
             })
         }
+    },
+
+    async deleteEvent(req, res, next) {
+        const {
+            event_id
+        } = req.params;
+        try {
+            const events = await Events.deleteEvent(event_id);
+            if (!events) {
+                return response.errorHelper(res, 400, "Event don't exists")
+            }
+            return response.successHelper(res, 200, events)
+        } catch (error) {
+            next({
+                message: "Error cannot delete event"
+            })
+        }
     }
 }

@@ -22,7 +22,7 @@ module.exports = {
         return db('events')
             .insert(event)
             .returning('*')
-            .then(([ids]) => Object.keys(ids).length ? ids : null)
+            .then((ids) => ids.length ? ids : null)
     },
 
     updateEvent(id, event, user_id) {
@@ -34,13 +34,13 @@ module.exports = {
             .then(ids => ids ? this.findEvents(user_id) : null)
     },
 
-    deleteEvent(id) {
-        const event = this.findEvents(id);
+    deleteEvent(event_id) {
         return db('events')
             .where({
-                id
+                id: event_id
             })
             .del()
-            .then(() => event)
+            .returning('*')
+            .then((res) => res.length ? res : null)
     }
 }
