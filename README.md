@@ -77,6 +77,7 @@ Login
     ]
 ```
 
+
 ### Errors and Status Codes
 
 If a request fails any validations, expect errors in the following format:
@@ -176,9 +177,19 @@ Example request body:
 
 ```source-json
 {
-  "event_name": "lambda build week",
+  	 "event_name": "lambda build week",
 	 "event_date : "22/8/2019",
 	 "event_venue" : " zoom",
 	 "event_location": "online",
 }
 ```
+
+### Get User Event
+`GET /api/user/:id/event`
+where id id the users id
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+
