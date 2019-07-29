@@ -37,5 +37,31 @@ module.exports = {
                 message: "Error cannot get event"
             })
         }
+    },
+
+    async updateAnEvent(req, res, next) {
+        const {
+            id
+        } = req.params;
+        const {
+            event_id
+        } = req.params;
+        const {
+            body
+        } = req;
+        try {
+            const event = await Events.updateEvent(event_id, {
+                ...body,
+                user_id: id
+            }, id)
+            if (!event) {
+                return response.errorHelper(res, 400, 'event did not update')
+            }
+            return response.successHelper(res, 200, event)
+        } catch (error) {
+            next({
+                message: "Error updating event"
+            })
+        }
     }
 }

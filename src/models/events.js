@@ -25,15 +25,13 @@ module.exports = {
             .then(([ids]) => Object.keys(ids).length ? ids : null)
     },
 
-    updateEvent(id, event) {
+    updateEvent(id, event, user_id) {
         return db('events')
             .where({
                 id
             })
             .update(event)
-            .then(ids => {
-                console.log(ids)
-            })
+            .then(ids => ids ? this.findEvents(user_id) : null)
     },
 
     deleteEvent(id) {
