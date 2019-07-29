@@ -243,3 +243,16 @@ Example in request body:
 }
 ```
 returns all the events for that user
+
+### Delete User Event
+`DELETE /api/user/:id/event/event_id`
+where id is the users id
+event_id is the events id
+
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+Returns the event deleted by the user.
+
