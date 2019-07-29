@@ -25,8 +25,7 @@ module.exports = {
         } = req;
         try {
             const user = await Users.findUser(body.email)
-            const comparePassword = await bcrypt.comparePassword(body.password, user.password);
-            if (!user || !comparePassword) {
+            if (!user || !await bcrypt.comparePassword(body.password, user.password)) {
                 return response.errorHelper(res, 401, 'Invalid credetianls')
             }
             const token = await jwt.generateToken(user)
@@ -34,15 +33,13 @@ module.exports = {
                 id,
                 first_name,
                 last_name,
-                email,
-                phone
+                email
             } = user
             const users = {
                 id,
                 first_name,
                 last_name,
                 email,
-                phone,
                 token
             }
             return response.successHelper(res, 200, users)
@@ -59,7 +56,6 @@ module.exports = {
         } = req.params;
         try {
             const user = await Users.getUser(id);
-            console.log(user)
             if (!user) {
                 return response.errorHelper(res, 404, 'You are not a User')
             }
