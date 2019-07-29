@@ -1,5 +1,5 @@
 const knex = require('knex');
-const config = require('../knexfile');
+const config = require('../../knexfile');
 const secret = require('../config/secrets');
 
 const env = process.env.DB_ENV || secret.nodeEnvironment;

@@ -1,5 +1,5 @@
 // Update with your config settings.
-const secret = require('./config/secrets');
+const secret = require('./src/config/secrets');
 
 module.exports = {
 
@@ -14,10 +14,10 @@ module.exports = {
     },
     useNullAsDefault: true,
     migrations: {
-      directory: './data/migrations'
+      directory: './src/data/migrations'
     },
     seeds: {
-      directory: './data/seeds'
+      directory: './src/data/seeds'
     }
   },
 
