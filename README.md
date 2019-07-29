@@ -192,4 +192,23 @@ req.header.token = token
 Authentication required, returns a User that's the current user
 set token on the header and pass the token recieved during Login
 
+### Update Event
+`PATCH /api/user/:id/event/event_id`
+where id is the users id
+event_id is the events id
 
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+Example in request body:
+```source-json
+{
+  	 "event_name": "lambda build week frontend",
+	 "event_date : "22/8/2019",
+	 "event_venue" : " zoom",
+	 "event_location": "online",
+}
+```
+returns all the events for that user
