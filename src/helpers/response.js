@@ -1,5 +1,11 @@
 module.exports = {
     successHelper(res, status, data) {
+        if (data.length) {
+            return res.status(status).json({
+                status,
+                data
+            })
+        }
         return res.status(status).json({
             status,
             data: [data]

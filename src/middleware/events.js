@@ -1,6 +1,6 @@
 const Events = require('../models/events');
 const response = require('../helpers/response');
-const validator = require('validator');
+const validator = require('validatorjs');
 const Users = require('../models/users');
 
 module.exports = {
@@ -8,9 +8,14 @@ module.exports = {
         const {
             body
         } = req;
-        const hasrequiredField = 'name_event' && 'event_date' && 'event_venue' in body;
-        if (!hasrequiredField) {
-            return response.errorHelper(res, 400, "event name, date and venue are required")
+        let validation = new validator(body, {
+            name_event: 'required|string',
+            event_date: 'required|string',
+            event_venue: 'required|string'
+        });
+        if (validation.fails()) {
+            const err = validation.errors.all()
+            return response.errorHelper(res, 400, err)
         }
         next();
     },

@@ -1,14 +1,19 @@
 const db = require('../data/dbConfig');
 
 module.exports = {
-    findEvents(id) {
-        if (id) {
+    findEvents(user_id) {
+        if (user_id) {
             return db('events')
                 .where({
-                    id
+                    user_id
                 })
-                .first()
-                .then(ids => ids ? ids : null)
+                .then((ids) => {
+                    if (ids.length) {
+                        return ids
+                    } else {
+                        return null
+                    }
+                })
         };
         return db('events');
     },
