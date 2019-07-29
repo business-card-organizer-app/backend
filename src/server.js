@@ -14,5 +14,10 @@ server.use(express.json());
 server.use(userRoute);
 server.use(eventRoute);
 
+server.all('*', (req, res) => {
+    res.status(404).json({
+        message: "This endpoint doesn't exists"
+    })
+})
 
 module.exports = server;
