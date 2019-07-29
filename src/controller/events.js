@@ -26,5 +26,16 @@ module.exports = {
         const {
             id
         } = req.params;
+        try {
+            const event = await Events.findEvents(id);
+            if (!event) {
+                return response.errorHelper(res, 404, "no events for these user")
+            }
+            return response.successHelper(res, 200, event)
+        } catch (error) {
+            next({
+                message: "Error cannot get event"
+            })
+        }
     }
 }
