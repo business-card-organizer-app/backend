@@ -12,6 +12,7 @@ module.exports = {
       database: 'bussiness-card-app',
       charset: 'utf8'
     },
+    useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
     },
@@ -24,11 +25,12 @@ module.exports = {
     client: 'pg',
     connection: {
       host: '127.0.0.1',
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      user: secret.dbUsername,
+      password: secret.dbPassword,
       database: 'bussiness-card-testing',
       charset: 'utf8'
     },
+    useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
     },
@@ -55,11 +57,8 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
+    connection: secret.herokuDb,
+    useNullAsDefault: true,
     pool: {
       min: 2,
       max: 10

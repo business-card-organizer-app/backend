@@ -14,6 +14,7 @@ exports.up = function (knex) {
             .notNullable()
             .unique()
         tbl.text('qr_code')
+        tbl.text('user_image')
     })
 };
 
