@@ -8,6 +8,12 @@ exports.up = function (knex) {
         tbl.text('event_venue')
             .notNullable()
         tbl.text('event_location')
+        tbl.integer('user_id')
+            .unsigned()
+            .references('id')
+            .inTable('users')
+            .onDelete("Cascade")
+            .onUpdate('Cascade')
     })
 };
 

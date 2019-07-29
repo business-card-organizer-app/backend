@@ -10,10 +10,6 @@ exports.up = function (knex) {
             .notNullable()
         tbl.text('password')
             .notNullable()
-        tbl.text('phone')
-            .notNullable()
-            .unique()
-        tbl.text('qr_code')
         tbl.text('user_image')
     })
 };

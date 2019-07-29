@@ -29,7 +29,7 @@ module.exports = {
         } = token;
         try {
             const user = await Users.getUser(subject);
-            if (!user || username !== (`${user.first_name}${user.last_name}`)) {
+            if (!user || username !== user.email) {
                 return response.errorHelper(res, 401, 'Invalid User Token')
             }
             next()

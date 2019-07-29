@@ -21,27 +21,16 @@ module.exports = {
         }
     },
 
-    validatePhone(phone) {
-        return db('users')
-            .where({
-                phone
-            })
-            .first()
-            .then(ids => ids ? ids : null)
-    },
-
     addUser(user) {
         const {
             first_name,
             last_name,
             email,
-            phone
         } = user
         const users = {
             first_name,
             last_name,
-            email,
-            phone
+            email
         }
         return db('users')
             .insert(user)
