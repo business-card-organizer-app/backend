@@ -6,8 +6,14 @@ module.exports = {
         const {
             body
         } = req;
+        const {
+            id
+        } = req.params;
         try {
-            const event = await Events.addEvent(body);
+            const event = await Events.addEvent({
+                ...body,
+                user_id: id
+            });
             return response.successHelper(res, 201, event)
         } catch (error) {
             next({

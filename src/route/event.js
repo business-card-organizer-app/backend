@@ -6,6 +6,6 @@ const userMidlw = require('../middleware/users');
 
 const route = express.Router();
 
-route.post('/api/user/event', auth.authToken, auth.authUser, eventMidlw.validateEvent, eventCtr.registerEvent);
+route.post('/api/user/:id/event', auth.authToken, auth.authUser, userMidlw.validateId, eventMidlw.validateUser, eventMidlw.validateEvent, eventCtr.registerEvent);
 
 module.exports = route;
