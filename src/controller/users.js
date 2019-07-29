@@ -59,6 +59,7 @@ module.exports = {
         } = req.params;
         try {
             const user = await Users.getUser(id);
+            console.log(user)
             if (!user) {
                 return response.errorHelper(res, 404, 'You are not a User')
             }
