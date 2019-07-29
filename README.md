@@ -147,6 +147,11 @@ set token on the header and pass the token recieved during Login
 ### Post Event
 `POST /api/user/:id/event`
 where id id the users id
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
 Example request body:
 
 ```source-json
