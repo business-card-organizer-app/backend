@@ -45,7 +45,7 @@ module.exports = {
         }
         return db('users')
             .insert(user)
-            .returning('id')
+            .returning('*')
             .then(() => users)
     }
 
