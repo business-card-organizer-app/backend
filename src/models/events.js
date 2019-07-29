@@ -22,10 +22,10 @@ module.exports = {
 
     updateEvent(id, event) {
         return db('events')
-            .update(event)
             .where({
                 id
             })
+            .update(event)
             .then(ids => {
                 console.log(ids)
             })
