@@ -77,6 +77,37 @@ Login
     ]
 ```
 
+##### Get all User Event response
+
+```source-json
+ "status": 200,
+    "data": [
+        {
+            "id": 1,
+            "name_event": "lambda school hackaton",
+            "event_date": "2019-01-11T23:00:00.000Z",
+            "event_venue": "zoom",
+            "event_location": "online",
+            "user_id": 1
+        },
+        {
+            "id": 3,
+            "name_event": "lambda school hackaton",
+            "event_date": "2019-01-11T23:00:00.000Z",
+            "event_venue": "zoom",
+            "event_location": "online",
+            "user_id": 1
+        },
+        {
+            "id": 4,
+            "name_event": "lambda school hackaton",
+            "event_date": "2019-01-11T23:00:00.000Z",
+            "event_venue": "zoom",
+            "event_location": "online",
+            "user_id": 1
+        },
+```
+
 
 ### Errors and Status Codes
 
