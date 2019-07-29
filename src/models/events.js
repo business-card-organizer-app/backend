@@ -17,12 +17,15 @@ module.exports = {
         return db('events')
             .insert(event)
             .returning('*')
-            .then((ids) => ids.length ? ids : null)
+            .then(([ids]) => Object.keys(ids).length ? ids : null)
     },
 
     updateEvent(id, event) {
         return db('events')
             .update(event)
+            .where({
+                id
+            })
             .then(ids => {
                 console.log(ids)
             })

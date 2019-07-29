@@ -37,13 +37,10 @@ module.exports = {
         const userpassword = validator.isLength(body.password, {
             min: 5
         });
-        const userfullname = validator.isAlpha(first_name) && validator.isAlpha(last_name)
         if (!useremail) {
             return response.errorHelper(res, 400, 'Invalid email type');
         } else if (!userpassword) {
             return response.errorHelper(res, 400, 'Password must constain min of 5 characters');
-        } else if (!userfullname) {
-            return response.errorHelper(res, 400, 'Input a valid name')
         }
         next()
     },
