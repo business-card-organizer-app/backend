@@ -89,6 +89,22 @@ If a request fails any validations, expect errors in the following format:
 }
 ```
 
+If requests on creating or updating event fails any validations, expect errors in the following format:
+
+```source-json
+{
+    "status": 400,
+    "message": {
+        "name_event": [
+            "The name event field is required."
+        ],
+        "event_venue": [
+            "The event venue field is required."
+        ]
+    }
+}
+```
+
 ### Other status codes:
 
 401 for Unauthorized requests, when a request requires authentication but it isn't provided
