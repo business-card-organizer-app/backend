@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "stable"
+install: npm install
 cache:
   directories:
     - "node_modules"
@@ -11,6 +12,7 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database bussiness_card_test;' -U postgres
+  -psql -c "CREATE USER test_user WITH PASSWORD 'password';" -U postgres
+script: npm test
 notifications:
   email: false
-  
