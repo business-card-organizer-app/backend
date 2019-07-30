@@ -27,7 +27,7 @@ module.exports = {
       host: '127.0.0.1',
       user: secret.dbUsername,
       password: secret.dbPassword,
-      database: 'bussiness-card-testing',
+      database: 'bussiness_card_test',
       charset: 'utf8'
     },
     useNullAsDefault: true,
