@@ -1,4 +1,5 @@
 const validator = require('validator');
+const Validation = require('validatorjs');
 const Users = require('../models/users');
 const response = require('../helpers/response');
 
@@ -24,14 +25,14 @@ module.exports = {
         const {
             body
         } = req;
-        const {
-            email,
-            password,
-            first_name,
-            last_name
-        } = body
-        if (!email.trim() || !password.trim() || !first_name.trim() || !last_name.trim()) {
-            return response.errorHelper(res, 400, "firstname, lastname, email and password are required")
+        let validation = new Validation(body, {
+            email: 'required',
+            first_name: 'required|string',
+            last_name: 'required|string',
+            password: 'required'
+        });
+        if (validation.fails()) {
+            return response.errorHelper(res, 400, "firstname, lastname, password and email are required")
         }
         const useremail = validator.isEmail(body.email);
         const userpassword = validator.isLength(body.password, {
