@@ -72,7 +72,7 @@ module.exports = {
         try {
             const events = await Events.deleteEvent(event_id);
             if (!events) {
-                return response.errorHelper(res, 400, "Event don't exists")
+                return response.errorHelper(res, 404, "Event don't exists")
             }
             return response.successHelper(res, 200, events)
         } catch (error) {

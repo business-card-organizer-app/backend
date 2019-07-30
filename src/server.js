@@ -20,4 +20,9 @@ server.all('*', (req, res) => {
     })
 })
 
+server.use(function errors(err, req, res, next) {
+    res.status(500).json(err)
+});
+
+
 module.exports = server;

@@ -1,5 +1,4 @@
-const request = require('supertest');
-const server = require('../../index');
+const request = require('./server')
 const db = require('../../data/dbConfig');
 const jwt = require('../../config/auth');
 // beforeAll(async () => {
@@ -12,7 +11,7 @@ describe('POST api/register', () => {
             email: 'nmereginivincent@gmail.com',
             password: 12345,
         };
-        return request(server)
+        return request
             .post('/api/register')
             .send(user)
             .then(res => {
@@ -27,7 +26,7 @@ describe('POST api/register', () => {
             email: 'nmereginivincentcom',
             password: '12345',
         };
-        return request(server)
+        return request
             .post('/api/register')
             .send(user)
             .then(res => {
@@ -42,7 +41,7 @@ describe('POST api/register', () => {
             email: 'nmereginivincent@yahoo.com',
             password: '12345',
         };
-        return request(server)
+        return request
             .post('/api/register')
             .send(user)
             .then(res => {
@@ -57,7 +56,7 @@ describe('POST api/register', () => {
             email: 'nmereginivincent@yahoo.com',
             password: '12345',
         };
-        return request(server)
+        return request
             .post('/api/register')
             .send(user)
             .then(res => {
@@ -69,7 +68,7 @@ describe('POST api/register', () => {
 
 describe('POST /api/login', () => {
     it('should return 400 if email or password is missing', () => {
-        return request(server)
+        return request
             .post('/api/login')
             .send({})
             .then(res => {
@@ -79,7 +78,7 @@ describe('POST /api/login', () => {
     });
 
     it('should return 400 if email is not a valid email type', () => {
-        return request(server)
+        return request
             .post('/api/login')
             .send({
                 email: 'vincent',
@@ -92,7 +91,7 @@ describe('POST /api/login', () => {
     });
 
     it('should return 200 if user information are correct', () => {
-        return request(server)
+        return request
             .post('/api/login')
             .send({
                 email: 'nmereginivincent@yahoo.com',
@@ -105,7 +104,7 @@ describe('POST /api/login', () => {
     });
 
     it('should return 400 if the user information and password is not correct', () => {
-        return request(server)
+        return request
             .post('/api/login')
             .send({
                 email: 'nmereginivincent@yahoo.com',
@@ -120,7 +119,7 @@ describe('POST /api/login', () => {
 
 describe('GET api/user/:id', () => {
     it('should return 400 if id is not a number', () => {
-        return request(server)
+        return request
             .get(`/api/user/${'a'}`)
             .then(res => {
                 expect(res.status).toBe(400)
@@ -129,7 +128,7 @@ describe('GET api/user/:id', () => {
     });
 
     it('should return 401 if token is not provided', () => {
-        return request(server)
+        return request
             .get(`/api/user/${1}`)
             .then(res => {
                 expect(res.status).toBe(401)
@@ -142,7 +141,7 @@ describe('GET api/user/:id', () => {
             id: 1,
             email: 'nmeregini'
         })
-        return request(server)
+        return request
             .get(`/api/user/${1}`)
             .set('token', token)
             .then(res => {
@@ -151,12 +150,12 @@ describe('GET api/user/:id', () => {
             })
     });
 
-    it('should return 401 if token is invalid provided', () => {
+    it('should return 200 if valid token is provided', () => {
         const token = jwt.generateToken({
-            id: 1,
+            id: 2,
             email: 'nmereginivincent@yahoo.com'
         })
-        return request(server)
+        return request
             .get(`/api/user/${1}`)
             .set('token', token)
             .then(res => {
