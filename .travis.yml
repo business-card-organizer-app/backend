@@ -1,10 +1,15 @@
 language: node_js
 node_js:
-  - "7"
+  - "stable"
 cache:
   directories:
     - "node_modules"
+env:
+  global:
+    - DB_ENV=testing
 services:
   - postgresql
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
+notifications:
+  email: false

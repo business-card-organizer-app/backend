@@ -12,3 +12,5 @@ server.use(function errors(err, req, res, next) {
 server.listen(PORT, () => {
     console.log(`server is listening at ${PORT}`)
 });
+
+module.exports = server;
