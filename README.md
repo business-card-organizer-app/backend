@@ -1,3 +1,4 @@
+https://travis-ci.org/business-card-organizer-app/backend.svg?branch=develop
 # BUSINESS CARD ORGANIZER.
 
 ## VISION
