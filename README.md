@@ -77,7 +77,7 @@ Login
     ]
 ```
 
-##### Get all User Event response
+### Get all User Event response
 
 ```source-json
  "status": 200,
@@ -182,7 +182,7 @@ Example request body:
 
 No authentication required, returns a User
 
-Required fields: `email`, `username`, `password`
+Required fields: `email`, `first_name`, `last_name`,`password`
 
 ### Get Current User
 
@@ -215,6 +215,9 @@ Example request body:
 }
 ```
 
+Required fields: `event_name`, `event_date`, `event_venue`
+Authentication is required set token in req.header
+
 ### Get User Event
 `GET /api/user/:id/event`
 where id id the users id
@@ -242,6 +245,8 @@ Example in request body:
 	 "event_location": "online",
 }
 ```
+Required fields: `event_name`, `event_date`, `event_venue`
+
 returns all the events for that user
 
 ### Delete User Event
