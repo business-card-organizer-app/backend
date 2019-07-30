@@ -13,3 +13,4 @@ before_script:
   - psql -c 'create database bussiness_card_test;' -U postgres
 notifications:
   email: false
+  
