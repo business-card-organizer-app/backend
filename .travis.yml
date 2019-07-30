@@ -10,6 +10,6 @@ env:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database bussiness-card-testing;' -U postgres
 notifications:
   email: false
