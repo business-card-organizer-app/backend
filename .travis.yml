@@ -6,7 +6,7 @@ cache:
     - "node_modules"
 env:
   global:
-    - DB_ENV=testing
+    - DB_TEST=testing
 services:
   - postgresql
 before_script:
