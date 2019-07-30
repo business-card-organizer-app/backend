@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "migration" : "npx knex migrate:latest",
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "pretest": "cross-env DB_ENV=testing npm run migration",
     "test-coverage": "jest --coverage"
   },
   "repository": {
