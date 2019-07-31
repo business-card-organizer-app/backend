@@ -60,5 +60,22 @@ module.exports = {
                 message: "Error cannot update card"
             })
         }
-    }
+    },
+
+    async deleteBussinessCard(req, res, next) {
+        const {
+            id
+        } = req.params;
+        try {
+            const card = await Card.deleteCard(id);
+            if (!card) {
+                return response.errorHelper(res, 400, "Card was not deleted")
+            }
+            return response.successHelper(res, 200, card)
+        } catch (error) {
+            next({
+                message: "Error card was not deleted"
+            })
+        }
+    },
 }
