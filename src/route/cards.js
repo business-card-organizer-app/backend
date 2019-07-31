@@ -6,5 +6,6 @@ const auth = require('../helpers/authenticat');
 
 const route = express.Router();
 route.post('/api/user/:id/card', auth.authToken, auth.authUser, userMidle.validateId, cardsMidle.validateCardExist, cardsMidle.validateCardRequest, cardCtr.generateBusiness);
+route.get('/api/user/:id/card', auth.authToken, auth.authUser, userMidle.validateId, cardCtr.getBussinessCard)
 
 module.exports = route;

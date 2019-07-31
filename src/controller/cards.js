@@ -23,5 +23,22 @@ module.exports = {
                 message: "Error generating card"
             })
         }
+    },
+
+    async getBussinessCard(req, res, next) {
+        const {
+            id
+        } = req.params;
+        try {
+            const card = await Card.findUserCard(id);
+            if (!card) {
+                return response.errorHelper(res, 404, "You don't have a bussiness card")
+            }
+            return response.successHelper(res, 200, card)
+        } catch (error) {
+            next({
+                message: "Error getting bussines card"
+            })
+        }
     }
 }

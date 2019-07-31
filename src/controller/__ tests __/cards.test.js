@@ -99,6 +99,60 @@ describe('POST /api/user/:id/card', () => {
                 expect(res.status).toBe(400)
                 expect(res.body.message).toBe('You already have a virtual card')
             })
-    })
-
+    });
 });
+
+describe('GET /api/user/:id/card', () => {
+    it('should return 401 if token is not provided', () => {
+        return request
+            .post(`/api/user/${1}/card`)
+            .then(res => {
+                expect(res.status).toBe(401)
+                expect(res.body.message).toBe('token is required')
+            })
+    });
+
+    it('should return 401 if token is invalid provided', () => {
+        const wrongtoken = jwt.generateToken({
+            id: 1,
+            email: 'nmeregini'
+        })
+        return request
+            .post(`/api/user/${1}/card`)
+            .set('token', wrongtoken)
+            .then(res => {
+                expect(res.status).toBe(401)
+                expect(res.body.message).toBe('Invalid User Token')
+            })
+    });
+
+    it('should return 400 if id is not a number', () => {
+        return request
+            .post(`/api/user/${'a'}/card`)
+            .set('token', token)
+            .then(res => {
+                expect(res.status).toBe(400)
+                expect(res.body.message).toBe('Invalid id type')
+            })
+    });
+
+    it('should return 404 if user has no card', () => {
+        return request
+            .get(`/api/user/${10}/card`)
+            .set('token', token)
+            .then(res => {
+                expect(res.status).toBe(404)
+                expect(res.body.message).toBe("You don't have a bussiness card")
+            })
+    });
+
+    it('should retuen 200 if user has a card', () => {
+        return request
+            .get(`/api/user/${1}/card`)
+            .set('token', token)
+            .then(res => {
+                expect(res.status).toBe(200)
+                expect(res.body.data).toHaveLength(1)
+            })
+    })
+})
