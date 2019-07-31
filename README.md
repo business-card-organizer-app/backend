@@ -330,3 +330,15 @@ Example in request body:
 ```
 Required fields: `qr_code`, `occupation`, `phone`
 		`qr_code` must be a valid url and `phone` a valid moblile number.
+
+### Delete a user Bussiness Card
+
+`DELETE /api/user/:id/card`
+where id is the users id
+
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+Returns the card deleted.
