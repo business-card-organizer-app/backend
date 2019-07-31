@@ -40,5 +40,25 @@ module.exports = {
                 message: "Error getting bussines card"
             })
         }
+    },
+
+    async updateBussinesCard(req, res, next) {
+        const {
+            id
+        } = req.params;
+        const {
+            body
+        } = req;
+        try {
+            const card = await Card.updateCard(id, body);
+            if (!card) {
+                return response.errorHelper(res, 400, "Card not updated")
+            }
+            return response.successHelper(res, 200, card);
+        } catch (error) {
+            next({
+                message: "Error cannot update card"
+            })
+        }
     }
 }
