@@ -20,9 +20,6 @@ const card = {
     phone: "08097425429"
 }
 
-beforeAll(async () => {
-    await db('users').insert(user)
-});
 
 describe('POST /api/user/:id/card', () => {
     it('should return 401 if token is not provided', () => {
@@ -59,6 +56,7 @@ describe('POST /api/user/:id/card', () => {
     });
 
     it('should return 400 if fields are incomplete', () => {
+
         const message = {
             "qr_code": [
                 "The qr code field is required."
@@ -70,6 +68,7 @@ describe('POST /api/user/:id/card', () => {
                 "The phone field is required."
             ]
         }
+
         return request
             .post(`/api/user/${1}/card`)
             .set('token', token)
