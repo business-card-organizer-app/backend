@@ -38,5 +38,22 @@ module.exports = {
                 message: "Error checking cards"
             })
         }
+    },
+
+    async validateUpdateCard(req, res, next) {
+        const {
+            id
+        } = req.params;
+        try {
+            const card = await Card.findUserCard(id);
+            if (!card) {
+                return response.errorHelper(res, 404, "You don't have a virtual card")
+            }
+            next()
+        } catch (error) {
+            next({
+                message: "Error checking cards"
+            })
+        }
     }
 }
