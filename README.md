@@ -122,7 +122,7 @@ Login
 	    "user_id" : "1"
 	 }
 	]
-	
+```
 
 ### Errors and Status Codes
 
