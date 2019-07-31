@@ -24,7 +24,7 @@ module.exports = {
             body
         } = req;
         try {
-            const user = await Users.findUser(body.email)
+            const [user] = await Users.findUser(body.email);
             if (!user || !await bcrypt.comparePassword(body.password, user.password)) {
                 return response.errorHelper(res, 401, 'Invalid credetianls')
             }
@@ -55,7 +55,8 @@ module.exports = {
             id
         } = req.params;
         try {
-            const user = await Users.getUser(id);
+            const [user] = await Users.getUser(id);
+
             if (!user) {
                 return response.errorHelper(res, 404, 'You are not a User')
             }

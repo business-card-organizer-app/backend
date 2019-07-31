@@ -1,7 +1,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable('cards', tbl => {
         tbl.increments();
-        tbl.string('qr_code')
+        tbl.text('qr_code', 222222222222)
             .unique()
             .notNullable();
         tbl.string('occupation')

@@ -14,9 +14,6 @@ const user = {
     password: '12345',
 };
 
-beforeAll(async () => {
-    await db('users').insert(user)
-});
 
 describe('POST /api/user/:id/event', () => {
     it('should return 401 if token is not provided', () => {
@@ -86,7 +83,7 @@ describe('POST /api/user/:id/event', () => {
             .set('token', token)
             .send({
                 name_event: 'kekdkdd',
-                event_date: '12/01/2019',
+                event_date: '1/01/2019',
                 event_venue: 'zoom'
             })
             .then(res => {
@@ -219,7 +216,7 @@ describe("PATCH /api/user/id/event/event_id", () => {
             .set('token', token)
             .send({
                 name_event: 'kekdkdd',
-                event_date: '12/01/2019',
+                event_date: '1/01/2019',
                 event_venue: 'zoom'
             })
             .then(res => {

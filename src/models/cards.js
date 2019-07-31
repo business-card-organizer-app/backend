@@ -6,7 +6,8 @@ module.exports = {
             .where({
                 user_id
             })
-            .first()
+            .returning('*')
+            .then(card => card.length ? card : null)
     },
 
     generateCard(user_id, card) {
@@ -15,8 +16,8 @@ module.exports = {
                 ...card,
                 user_id
             })
-            .returning('qr_code')
-            .then(([ids]) => Object.keys(ids).length ? ids : null)
+            .returning('*')
+            .then((ids) => ids.length ? ids : null)
     },
 
     updateCard(user_id, card) {
@@ -25,10 +26,8 @@ module.exports = {
                 user_id
             })
             .update(card)
-            .returning('qr_code')
-            .then((ids) => {
-                console.log(ids)
-            })
+            .returning('*')
+            .then((ids) => ids.length ? ids : null)
     },
 
     deleteCard(user_id) {
