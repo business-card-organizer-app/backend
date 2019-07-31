@@ -14,9 +14,6 @@ const user = {
     password: '12345',
 };
 
-beforeAll(async () => {
-    await db('users').insert(user)
-});
 
 describe('POST /api/user/:id/event', () => {
     it('should return 401 if token is not provided', () => {

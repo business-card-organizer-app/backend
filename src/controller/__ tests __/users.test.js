@@ -1,9 +1,8 @@
 const request = require('./server')
 const db = require('../../data/dbConfig');
 const jwt = require('../../config/auth');
-// beforeAll(async () => {
-//     await db('users').truncate()
-// })
+
+
 describe('POST api/register', () => {
     it('should return 400 if required field are not passed', () => {
         const user = {
