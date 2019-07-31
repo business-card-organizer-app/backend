@@ -6,8 +6,8 @@ module.exports = {
             .where({
                 email
             })
-            .first()
-            .then(ids => ids ? ids : null)
+            .returning('*')
+            .then(ids => ids.length ? ids : null)
     },
 
     getUser(id) {
@@ -16,8 +16,8 @@ module.exports = {
                 .where({
                     id
                 })
-                .first()
-                .then(ids => ids ? ids : null)
+                .returning('*')
+                .then(ids => ids.length ? ids : null)
         }
     },
 

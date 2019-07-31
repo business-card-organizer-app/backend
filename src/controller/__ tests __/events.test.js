@@ -86,7 +86,7 @@ describe('POST /api/user/:id/event', () => {
             .set('token', token)
             .send({
                 name_event: 'kekdkdd',
-                event_date: '12/01/2019',
+                event_date: '1/01/2019',
                 event_venue: 'zoom'
             })
             .then(res => {
@@ -219,7 +219,7 @@ describe("PATCH /api/user/id/event/event_id", () => {
             .set('token', token)
             .send({
                 name_event: 'kekdkdd',
-                event_date: '12/01/2019',
+                event_date: '1/01/2019',
                 event_venue: 'zoom'
             })
             .then(res => {

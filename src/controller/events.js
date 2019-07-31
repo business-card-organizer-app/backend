@@ -16,6 +16,7 @@ module.exports = {
             });
             return response.successHelper(res, 201, event)
         } catch (error) {
+            console.log(error.message)
             next({
                 message: "Error cannot add event"
             })

@@ -7,6 +7,7 @@ module.exports = {
                 .where({
                     user_id
                 })
+                .returning('*')
                 .then((ids) => {
                     if (ids.length) {
                         return ids

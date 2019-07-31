@@ -10,7 +10,7 @@ module.exports = {
         } = req;
         let validation = new validator(body, {
             name_event: 'required|string',
-            event_date: 'required|string',
+            event_date: 'required|string|date',
             event_venue: 'required|string'
         });
         if (validation.fails()) {

@@ -156,7 +156,7 @@ describe('GET api/user/:id', () => {
             email: 'nmereginivincent@yahoo.com'
         })
         return request
-            .get(`/api/user/${1}`)
+            .get(`/api/user/${2}`)
             .set('token', token)
             .then(res => {
                 expect(res.status).toBe(200)

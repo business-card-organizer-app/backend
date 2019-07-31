@@ -4,6 +4,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const userRoute = require('./route/user');
 const eventRoute = require('./route/event');
+const cardRoute = require('./route/cards');
 
 const server = express();
 
@@ -13,6 +14,7 @@ server.use(cors());
 server.use(express.json());
 server.use(userRoute);
 server.use(eventRoute);
+server.use(cardRoute);
 
 server.all('*', (req, res) => {
     res.status(404).json({
