@@ -109,6 +109,20 @@ Login
         },
 ```
 
+### Generate Cards 
+
+```source-json
+ "status": 201,
+    "data": [
+        {
+            "id": 1,
+            "qr_code": "data-gefghnschmhfvnnfvjawefbnrwjad dcdwfm,cakfmc",
+            "occupation" : "software engineer",
+	    "phone" : "08097425429",
+	    "user_id" : "1"
+	 }
+	]
+	
 
 ### Errors and Status Codes
 
@@ -262,3 +276,23 @@ set token on the header and pass the token recieved during Login
 
 Returns the event deleted by the user.
 
+### Create Card
+
+`POST /api/user/:id/card`
+where id is the users id
+
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+Example in request body:
+```source-json
+{
+  	 qr_code: "https://www.google.com",
+   	 occupation: "Software engineer",
+   	 phone: "08097425429"
+}
+```
+Required fields: `qr_code`, `occupation`, `phone`
+		`qr_code` must be a valid url and `phone` a valid moblile number
