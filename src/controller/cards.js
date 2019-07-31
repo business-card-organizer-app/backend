@@ -77,5 +77,7 @@ module.exports = {
                 message: "Error card was not deleted"
             })
         }
-    }
+
+    },
+
 }
