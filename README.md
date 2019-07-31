@@ -114,13 +114,14 @@ Login
 ```source-json
  "status": 201,
     "data": [
-        {
+       {
             "id": 1,
-            "qr_code": "data-gefghnschmhfvnnfvjawefbnrwjad dcdwfm,cakfmc",
-            "occupation" : "software engineer",
-	    "phone" : "08097425429",
-	    "user_id" : "1"
-	 }
+            "qr_code": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAYAAABRRIOnAAAAAklEQVR4AewaftIAAAOVSURBVO3BO67kWgIDwcwD7X/LnDaeQUuAoKrbn2GE+YWZ/xxmymGmHGbKYaYcZsphphxmymGmHGbKYaYcZsphphxmymGmHGbKxUsqPykJn6TSkvCESktCU/lJSXjjMFMOM+UwUy4+LAmfpPJJKk+o3EnCE0n4JJVPOsyUw0w5zJSLL1N5IglPqDyRhKbyhkpLwhMqTyThmw4z5TBTDjPl4h+ThKbSVFoSmkpLwv+Tw0w5zJTDTLn4x6i0JDSVpvKGSkvC3+wwUw4z5TBTLr4sCb+Tyhsq35SEP8lhphxmymGmXHyYyu+UhKbSktBUWhKaSktCU3lC5U92mCmHmXKYKeYX/mIqbyThDZWWhL/ZYaYcZsphply8pNKS0FQ+KQktCXdUnlB5Igl3VD4pCd90mCmHmXKYKRcfpvJEEr4pCU3lThKeULmThKbSkvCESkvCJx1mymGmHGbKxYcloam0JDyh0pLwhEpLwh2VloSm8oTKHZU7Sbij0pLwxmGmHGbKYaaYX/gglZaEpnInCXdUWhKaSkvCGyotCU3lThKaSkvCGyotCW8cZsphphxmysWXqdxJwh2VloQnVFoS7qg8kYSm0lTuqLQkNJWfdJgph5lymCkXL6m0JDSVN5LQVFoSWhKeULmThDsqd5LQVFoSmkpLQlNpSfikw0w5zJTDTLn4w6jcScIdlZaEO0loKk3lDZU7Km+otCS8cZgph5lymCkXX5aEpvJEEppKS8IbKi0JTaUloancSUJTuZOEO0loKp90mCmHmXKYKRc/LAlPqLyh0pJwR+WTVN5QaUloSfikw0w5zJTDTDG/8BdTaUl4Q6UloancScITKneS8JMOM+UwUw4z5eIllZ+UhJaEptKS0FTuJKGptCQ0lTsqLQl3ktBUnkjCG4eZcpgph5ly8WFJ+CSVOyp3VO4k4ZuS8IRKS8JPOsyUw0w5zJSLL1N5IglvJOGOyhNJaCp3VN5IQlN5IglvHGbKYaYcZsrFP06lJaGp3ElCS0JTaUloKi0JTaWp/E6HmXKYKYeZcvGPS8KdJDSVptKS0JJwJwl3ktBU7iShqXzSYaYcZsphplx8WRK+KQlN5U4SmsqdJDSVJ5LQVJ5Iwk86zJTDTDnMlIsPU/lJKi0JbyShqbQk/CSVn3SYKYeZcpgp5hdm/nOYKYeZcpgph5lymCmHmXKYKYeZcpgph5lymCmHmXKYKYeZcpgp/wOBdYNA7Yhm3QAAAABJRU5ErkJggg==",
+            "occupation": "software engineer",
+            "phone": "08097425429",
+            "created_at": "2019-07-31T10:52:30.523Z",
+            "user_id": 1
+        }
 	]
 ```
 
@@ -295,4 +296,16 @@ Example in request body:
 }
 ```
 Required fields: `qr_code`, `occupation`, `phone`
-		`qr_code` must be a valid url and `phone` a valid moblile number
+		`qr_code` must be a valid url and `phone` a valid moblile number.
+
+### Get a user Bussiness Card
+
+`GET /api/user/:id/card`
+where id is the users id
+
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+Returns the users bussiness card
