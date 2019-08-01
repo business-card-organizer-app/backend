@@ -85,6 +85,7 @@ module.exports = {
             file
         } = req;
         const user_image = file.url;
+        console.log(user_image)
         try {
             const user = await Users.updateUser(user_image, req.params.id);
             if (!user) {
@@ -92,6 +93,7 @@ module.exports = {
             }
             return response.successHelper(res, 200, user)
         } catch (error) {
+            console.log(error.message)
             next({
                 message: "Error updating user"
             })
