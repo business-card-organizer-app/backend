@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/business-card-organizer-app/backend.svg?branch=develop)](https://travis-ci.org/business-card-organizer-app/backend) [![Coverage Status](https://coveralls.io/repos/github/business-card-organizer-app/backend/badge.svg?branch=develop)](https://coveralls.io/github/business-card-organizer-app/backend?branch=develop)
+[![Build Status](https://travis-ci.org/business-card-organizer-app/backend.svg?branch=develop)](https://travis-ci.org/business-card-organizer-app/backend) [![Coverage Status](https://coveralls.io/repos/github/business-card-organizer-app/backend/badge.svg?branch=develop)](https://coveralls.io/github/business-card-organizer-app/backend?branch=develop)  <a href="https://codeclimate.com/github/business-card-organizer-app/backend/maintainability"><img src="https://api.codeclimate.com/v1/badges/d699c46ed79b440ec1f5/maintainability" /></a>
 # BUSINESS CARD ORGANIZER.
 
 ## VISION
