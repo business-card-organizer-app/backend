@@ -125,6 +125,29 @@ Login
 	]
 ```
 
+### Get User Card Collection
+```source-json
+ "status": 200,
+    "data": [
+    {
+            "occupation": "software engineer",
+            "phone": "08056745324",
+            "name_event": "lambda build week",
+            "event_date": "2019-02-01T23:00:00.000Z",
+            "event_venue": "zoom",
+            "event_location": "online"
+        },
+        {
+            "occupation": "Fullstack Software engineer",
+            "phone": "08097425429",
+            "name_event": "lambda build week",
+            "event_date": "2019-02-01T23:00:00.000Z",
+            "event_venue": "zoom",
+            "event_location": "online"
+        }
+]
+```
+
 ### Errors and Status Codes
 
 If a request fails any validations, expect errors in the following format:
@@ -342,3 +365,37 @@ Authentication required, returns a User that's the current user
 set token on the header and pass the token recieved during Login
 
 Returns the card deleted.
+
+### Add a Bussiness Card
+
+`POST /api/user/:id/collection`
+where id is the users id
+
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+
+Example in request body:
+```source-json
+{
+  	 card_id: 1,
+   	 event_id: 2,
+}
+```
+Required fields:`card_id` the id of the card you want to add.
+if user already have the card it returns a 400.
+
+### Get all cards in a user collection
+
+`GET /api/user/:id/collection`
+where id is the users id
+
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+Returns the list of bussiness cards.
+
