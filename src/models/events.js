@@ -43,5 +43,14 @@ module.exports = {
             .del()
             .returning('*')
             .then((res) => res.length ? res : null)
+    },
+
+    findEvent(id) {
+        return db('events')
+            .where({
+                id
+            })
+            .returning('*')
+            .then(res => res.length ? res : null)
     }
 }

@@ -1,7 +1,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable('card_collections', tbl => {
         tbl.increments();
-        tbl.unique(['user_id', 'card_id', 'event_id'])
+        tbl.unique(['user_id', 'card_id'])
         tbl.integer('user_id')
             .notNullable()
             .unsigned()

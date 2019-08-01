@@ -39,4 +39,13 @@ module.exports = {
             .del()
             .then(() => card)
     },
+
+    findCard(id) {
+        return db('cards')
+            .where({
+                id
+            })
+            .returning('*')
+            .then(ids => ids.length ? ids : null)
+    }
 }

@@ -6,17 +6,10 @@ const token = jwt.generateToken({
     email: 'nmereginivincent@gmail.com'
 });
 
-const card = {
-    qr_code: "https://www.google.com",
-    occupation: "Software engineer",
-    phone: "08097425429"
-}
-
-
-describe('POST /api/user/:id/card', () => {
+describe('GET /api/user/:id/collection/:card_id', () => {
     it('should return 401 if token is not provided', () => {
         return request
-            .post(`/api/user/${1}/card`)
+            .get(`/api/user/${1}/collection/${1}`)
             .then(res => {
                 expect(res.status).toBe(401)
                 expect(res.body.message).toBe('token is required')
@@ -29,7 +22,7 @@ describe('POST /api/user/:id/card', () => {
             email: 'nmeregini'
         })
         return request
-            .post(`/api/user/${1}/card`)
+            .get(`/api/user/${1}/collection/${1}`)
             .set('token', wrongtoken)
             .then(res => {
                 expect(res.status).toBe(401)
@@ -39,7 +32,7 @@ describe('POST /api/user/:id/card', () => {
 
     it('should return 400 if id is not a number', () => {
         return request
-            .post(`/api/user/${'a'}/card`)
+            .get(`/api/user/${'a'}/collection/${1}`)
             .set('token', token)
             .then(res => {
                 expect(res.status).toBe(400)
@@ -47,112 +40,119 @@ describe('POST /api/user/:id/card', () => {
             })
     });
 
-    it('should return 400 if fields are incomplete', () => {
-
-        const message = {
-            "qr_code": [
-                "The qr code field is required."
-            ],
-            "occupation": [
-                "The occupation field is required."
-            ],
-            "phone": [
-                "The phone field is required."
-            ]
-        }
-
+    it('should return 404 if card dont exists', () => {
         return request
-            .post(`/api/user/${1}/card`)
+            .get(`/api/user/${1}/collection/${10}`)
+            .set('token', token)
+            .then(res => {
+                expect(res.status).toBe(404)
+                expect(res.body.message).toBe('No such card in collection')
+            })
+    });
+
+    it('should return the list of card', () => {
+        return request
+            .get(`/api/user/${1}/collection/${1}`)
+            .set('token', token)
+            .then(res => {
+                expect(res.status).toBe(200)
+                expect(res.body.data).toHaveLength(1)
+            })
+    })
+});
+
+describe('POST /api/user/:id/collection', () => {
+    it('should return 401 if token is not provided', () => {
+        return request
+            .post(`/api/user/${1}/collection`)
+            .then(res => {
+                expect(res.status).toBe(401)
+                expect(res.body.message).toBe('token is required')
+            })
+    });
+
+    it('should return 401 if token is invalid provided', () => {
+        const wrongtoken = jwt.generateToken({
+            id: 1,
+            email: 'nmeregini'
+        })
+        return request
+            .post(`/api/user/${1}/collection`)
+            .set('token', wrongtoken)
+            .then(res => {
+                expect(res.status).toBe(401)
+                expect(res.body.message).toBe('Invalid User Token')
+            })
+    });
+
+    it('should return 400 if id is not a number', () => {
+        return request
+            .post(`/api/user/${'a'}/collection`)
+            .set('token', token)
+            .then(res => {
+                expect(res.status).toBe(400)
+                expect(res.body.message).toBe('Invalid id type')
+            })
+    });
+
+    it('should return 400 if body type is not correct', () => {
+        const err = {
+            card_id: ['The card id field is required.']
+        }
+        return request
+            .post(`/api/user/${1}/collection`)
             .set('token', token)
             .send({})
             .then(res => {
                 expect(res.status).toBe(400)
-                expect(res.body.message).toMatchObject(message)
+                expect(res.body.message).toMatchObject(err)
             })
-    })
+    });
 
-    it('should return 201 if card was created', () => {
+    it('should return 400 if user already have the bussiness card', () => {
         return request
-            .post(`/api/user/${1}/card`)
+            .post(`/api/user/${1}/collection`)
             .set('token', token)
-            .send(card)
+            .send({
+                card_id: 1
+            })
+            .then(res => {
+                expect(res.status).toBe(400)
+                expect(res.body.message).toBe('Already have these bussiness card')
+            })
+    });
+
+    it('should return a 404 if bussiness card dont exist', () => {
+        return request
+            .post(`/api/user/${1}/collection`)
+            .set('token', token)
+            .send({
+                card_id: 10
+            })
+            .then(res => {
+                expect(res.status).toBe(404)
+                expect(res.body.message).toBe("Bussiness card does not exists")
+            })
+    });
+
+    it('should return 201 when a card is added to a collection', () => {
+        return request
+            .post(`/api/user/${2}/collection`)
+            .set('token', token)
+            .send({
+                card_id: 1
+            })
             .then(res => {
                 expect(res.status).toBe(201)
                 expect(res.body.data).toHaveLength(1)
             })
-    });
-
-    it('should return 400 if user has card', () => {
-        return request
-            .post(`/api/user/${1}/card`)
-            .set('token', token)
-            .send(card)
-            .then(res => {
-                expect(res.status).toBe(400)
-                expect(res.body.message).toBe('You already have a virtual card')
-            })
-    });
-});
-
-describe('GET /api/user/:id/card', () => {
-    it('should return 401 if token is not provided', () => {
-        return request
-            .post(`/api/user/${1}/card`)
-            .then(res => {
-                expect(res.status).toBe(401)
-                expect(res.body.message).toBe('token is required')
-            })
-    });
-
-    it('should return 401 if token is invalid provided', () => {
-        const wrongtoken = jwt.generateToken({
-            id: 1,
-            email: 'nmeregini'
-        })
-        return request
-            .post(`/api/user/${1}/card`)
-            .set('token', wrongtoken)
-            .then(res => {
-                expect(res.status).toBe(401)
-                expect(res.body.message).toBe('Invalid User Token')
-            })
-    });
-
-    it('should return 400 if id is not a number', () => {
-        return request
-            .post(`/api/user/${'a'}/card`)
-            .set('token', token)
-            .then(res => {
-                expect(res.status).toBe(400)
-                expect(res.body.message).toBe('Invalid id type')
-            })
-    });
-
-    it('should return 404 if user has no card', () => {
-        return request
-            .get(`/api/user/${10}/card`)
-            .set('token', token)
-            .then(res => {
-                expect(res.status).toBe(404)
-                expect(res.body.message).toBe("You don't have a bussiness card")
-            })
-    });
-
-    it('should retuen 200 if user has a card', () => {
-        return request
-            .get(`/api/user/${1}/card`)
-            .set('token', token)
-            .then(res => {
-                expect(res.status).toBe(200)
-                expect(res.body.data).toHaveLength(1)
-            })
     })
 });
 
-describe('PATCH /api/user/:id/card', () => {
+describe('GET /api/user/:id/collection', () => {
     it('should return 401 if token is not provided', () => {
         return request
-            .patch(`/api/user/${1}/card`)
+            .get(`/api/user/${1}/collection`)
             .then(res => {
                 expect(res.status).toBe(401)
                 expect(res.body.message).toBe('token is required')
@@ -165,7 +165,7 @@ describe('PATCH /api/user/:id/card', () => {
             email: 'nmeregini'
         })
         return request
-            .patch(`/api/user/${1}/card`)
+            .get(`/api/user/${1}/collection`)
             .set('token', wrongtoken)
             .then(res => {
                 expect(res.status).toBe(401)
@@ -175,7 +175,7 @@ describe('PATCH /api/user/:id/card', () => {
 
     it('should return 400 if id is not a number', () => {
         return request
-            .patch(`/api/user/${'a'}/card`)
+            .get(`/api/user/${'a'}/collection`)
             .set('token', token)
             .then(res => {
                 expect(res.status).toBe(400)
@@ -183,78 +183,32 @@ describe('PATCH /api/user/:id/card', () => {
             })
     });
 
-    it('should return 404 if user has no card', () => {
+    it('should return 404 if user has no cards', () => {
         return request
-            .patch(`/api/user/${10}/card`)
+            .get(`/api/user/${10}/collection`)
             .set('token', token)
             .then(res => {
                 expect(res.status).toBe(404)
-                expect(res.body.message).toBe("You don't have a virtual card")
+                expect(res.body.message).toBe("No cards in your collection")
             })
     });
 
-    it('should return 200 when card is updated', () => {
-        return request
-            .patch(`/api/user/${1}/card`)
-            .set('token', token)
-            .send(card)
-            .then(res => {
-                expect(res.status).toBe(200)
-                expect(res.body.data).toHaveLength(1)
-            })
-    })
-});
+    it('should return 200 if user has a cards in his collection', () => {
+        const data = [{
+            occupation: 'Software engineer',
+            phone: '08097425294',
+            name_event: null,
+            event_date: null,
+            event_venue: null,
+            event_location: null
+        }];
 
-describe('DELETE /api/user/:id/card', () => {
-    it('should return 401 if token is not provided', () => {
         return request
-            .delete(`/api/user/${1}/card`)
-            .then(res => {
-                expect(res.status).toBe(401)
-                expect(res.body.message).toBe('token is required')
-            })
-    });
-
-    it('should return 401 if token is invalid provided', () => {
-        const wrongtoken = jwt.generateToken({
-            id: 1,
-            email: 'nmeregini'
-        })
-        return request
-            .delete(`/api/user/${1}/card`)
-            .set('token', wrongtoken)
-            .then(res => {
-                expect(res.status).toBe(401)
-                expect(res.body.message).toBe('Invalid User Token')
-            })
-    });
-
-    it('should return 400 if id is not a number', () => {
-        return request
-            .delete(`/api/user/${'a'}/card`)
-            .set('token', token)
-            .then(res => {
-                expect(res.status).toBe(400)
-                expect(res.body.message).toBe('Invalid id type')
-            })
-    });
-
-    it('should return 404 if user has no card', () => {
-        return request
-            .delete(`/api/user/${10}/card`)
-            .set('token', token)
-            .then(res => {
-                expect(res.status).toBe(404)
-                expect(res.body.message).toBe("You don't have a virtual card")
-            })
-    });
-
-    it('should return 200 when card is deleted', () => {
-        return request
-            .delete(`/api/user/${1}/card`)
+            .get(`/api/user/${1}/collection`)
             .set('token', token)
             .then(res => {
                 expect(res.status).toBe(200)
+                expect(res.body.data).toMatchObject(data)
                 expect(res.body.data).toHaveLength(1)
             })
     })

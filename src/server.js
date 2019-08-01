@@ -5,6 +5,7 @@ const cors = require('cors');
 const userRoute = require('./route/user');
 const eventRoute = require('./route/event');
 const cardRoute = require('./route/cards');
+const collectionRoute = require('./route/collections');
 
 const server = express();
 
@@ -15,6 +16,7 @@ server.use(express.json());
 server.use(userRoute);
 server.use(eventRoute);
 server.use(cardRoute);
+server.use(collectionRoute);
 
 server.all('*', (req, res) => {
     res.status(404).json({
