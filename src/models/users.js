@@ -36,6 +36,16 @@ module.exports = {
             .insert(user)
             .returning('*')
             .then(() => users)
+    },
+
+    updateUser(user, id) {
+        return db('users')
+            .update(user)
+            .where({
+                id
+            })
+            .returning('first_name', 'last_name', 'email', 'user_image')
+            .then(res => res.length ? res : null)
     }
 
 }
