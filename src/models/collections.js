@@ -4,7 +4,7 @@ module.exports = {
     findCardCollection(card_id) {
         if (card_id) {
             return db('card_collections')
-                .select('*')
+                .select('occupation', 'phone', 'name_event', 'event_date', 'event_venue', 'event_location')
                 .innerJoin('cards', 'card_id', 'cards.id')
                 .innerJoin('users', 'card_collections.user_id', 'users.id')
                 .leftJoin('events', 'event_id', 'events.id')

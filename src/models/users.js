@@ -36,6 +36,18 @@ module.exports = {
             .insert(user)
             .returning('*')
             .then(() => users)
+    },
+
+    updateUser(user_image, id) {
+        return db('users')
+            .update({
+                user_image
+            })
+            .where({
+                id
+            })
+            .returning(['first_name', 'last_name', 'email', 'user_image'])
+            .then(res => res.length ? res : null)
     }
 
 }

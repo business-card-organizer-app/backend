@@ -25,6 +25,11 @@ server.all('*', (req, res) => {
 })
 
 server.use(function errors(err, req, res, next) {
+    if (err.http_code === 400) {
+        return res.status(400).json({
+            message: 'Invalid image type ensure image is either jpg or png'
+        })
+    }
     res.status(500).json(err)
 });
 

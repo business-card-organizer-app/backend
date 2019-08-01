@@ -78,5 +78,23 @@ module.exports = {
                 message: 'Error cannot get user'
             })
         }
+    },
+
+    async uploadImage(req, res, next) {
+        const {
+            file
+        } = req;
+        const user_image = file.url;
+        try {
+            const user = await Users.updateUser(user_image, req.params.id);
+            if (!user) {
+                return response.errorHelper(res, 404, 'Invalid request')
+            }
+            return response.successHelper(res, 200, user)
+        } catch (error) {
+            next({
+                message: "Error updating user"
+            })
+        }
     }
 }
