@@ -11,12 +11,12 @@ module.exports = {
             id
         } = req.params;
         try {
-            const qrcode = await QRCode.toDataURL(body.qr_code)
-            body.qr_code = qrcode;
             const card = await Card.generateCard(id, body);
             if (!card) {
                 return response.errorHelper(res, 400, "Card was not generated")
             }
+            const qrcode = await QRCode.toDataURL(card[0].qr_code)
+            card[0].qr_code = qrcode;
             return response.successHelper(res, 201, card)
         } catch (error) {
             next({
@@ -34,6 +34,8 @@ module.exports = {
             if (!card) {
                 return response.errorHelper(res, 404, "You don't have a bussiness card")
             }
+            const qrcode = await QRCode.toDataURL(card[0].qr_code)
+            card[0].qr_code = qrcode;
             return response.successHelper(res, 200, card)
         } catch (error) {
             next({
@@ -54,6 +56,8 @@ module.exports = {
             if (!card) {
                 return response.errorHelper(res, 400, "Card not updated")
             }
+            const qrcode = await QRCode.toDataURL(card[0].qr_code)
+            card[0].qr_code = qrcode;
             return response.successHelper(res, 200, card);
         } catch (error) {
             next({
@@ -71,6 +75,8 @@ module.exports = {
             if (!card) {
                 return response.errorHelper(res, 400, "Card was not deleted")
             }
+            const qrcode = await QRCode.toDataURL(card[0].qr_code)
+            card[0].qr_code = qrcode;
             return response.successHelper(res, 200, card)
         } catch (error) {
             next({
