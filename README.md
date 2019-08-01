@@ -63,6 +63,7 @@ Login
     ]
 ```
 
+
 ### Event 
 
 ```source-json
@@ -232,6 +233,26 @@ req.header.token = token
 
 Authentication required, returns a User that's the current user
 set token on the header and pass the token recieved during Login
+
+```
+
+### Upload User Image
+
+`PATCH /api/user/:id/image`
+
+```source-json
+req.header.token = token
+
+Authentication required, returns a User that's the current user
+set token on the header and pass the token recieved during Login
+
+```
+Example request body:
+
+```source-json
+{ 
+	"user_image" : the image you want to upload
+}
 
 ```
 
