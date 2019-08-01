@@ -1,5 +1,4 @@
 const request = require('./server')
-const db = require('../../data/dbConfig');
 const jwt = require('../../config/auth');
 
 
@@ -151,11 +150,11 @@ describe('GET api/user/:id', () => {
 
     it('should return 200 if valid token is provided', () => {
         const token = jwt.generateToken({
-            id: 2,
+            id: 3,
             email: 'nmereginivincent@yahoo.com'
         })
         return request
-            .get(`/api/user/${2}`)
+            .get(`/api/user/${3}`)
             .set('token', token)
             .then(res => {
                 expect(res.status).toBe(200)

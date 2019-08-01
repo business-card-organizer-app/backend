@@ -8,6 +8,9 @@ module.exports = {
                 card_id
             } = req.params;
             const collection = await Collections.findCardCollection(card_id);
+            if (!collection) {
+                return response.errorHelper(res, 404, "No such card in collection")
+            }
             return response.successHelper(res, 200, collection)
         } catch (error) {
             next({
@@ -33,7 +36,6 @@ module.exports = {
             }
             return response.successHelper(res, 201, collection)
         } catch (error) {
-            console.log(error.message)
             next({
                 message: "Error adding card"
             })

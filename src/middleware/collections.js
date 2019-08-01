@@ -42,12 +42,12 @@ module.exports = {
         try {
             const card = await Cards.findCard(card_id);
             if (!card) {
-                return response.errorHelper(res, 400, "Bussiness card does not exists")
+                return response.errorHelper(res, 404, "Bussiness card does not exists")
             }
             if (event_id) {
                 const event = await Events.findEvent(event_id);
                 if (!event) {
-                    return response.errorHelper(res, 400, "No such event")
+                    return response.errorHelper(res, 404, "No such event")
                 }
             }
             next()
