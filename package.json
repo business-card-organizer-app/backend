@@ -10,7 +10,7 @@
     "test": "cross-env DB_TEST=testing jest --forceExit",
     "pretest": "cross-env DB_TEST=testing && npm run migration",
     "test-coverage": "jest --coverage",
-    "coverage": " npm run pretest && cross-env DB_TEST=testing jest --coverage --coverageReporters=text-lcov | coveralls"
+    "coverage": " npm run pretest && cross-env DB_TEST=testing jest --coverage --coverageReporters=text-lcov | coveralls --forceExit"
   },
   "repository": {
     "type": "git",
