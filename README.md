@@ -13,7 +13,7 @@ https://bussiness-card-app.herokuapp.com/
 
 ## API Spec
 
-The preferred JSON object to be returned by the API should be structured as follows:
+The preferred JSON object to be returned by the API is structured as follows:
 
 ### Users (for Login)
 
