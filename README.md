@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/business-card-organizer-app/backend.svg?branch=develop)](https://travis-ci.org/business-card-organizer-app/backend)
+
+[![Coverage Status](https://coveralls.io/repos/github/business-card-organizer-app/backend/badge.svg?branch=develop)](https://coveralls.io/github/business-card-organizer-app/backend?branch=develop)
 # BUSINESS CARD ORGANIZER.
 
 ## VISION
