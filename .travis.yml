@@ -14,7 +14,8 @@ services:
 before_script:
   - psql -c 'create database bussiness_card_test;' -U postgres
   - psql -c "CREATE USER username WITH PASSWORD 'password';" -U postgres
-
+after_success:
+  - npm run coverage
 script: npm test
 notifications:
   email: false

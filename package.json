@@ -7,10 +7,10 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "migration": "npx knex migrate:rollback --env=testing && npx knex migrate:latest --env=testing && npx knex seed:run --env=testing",
-    "test": "npm run coverage && cross-env DB_TEST=testing jest --forceExit",
+    "test": "cross-env DB_TEST=testing jest --forceExit",
     "pretest": "cross-env DB_TEST=testing && npm run migration",
     "test-coverage": "jest --coverage",
-    "coverage": "cross-env DB_TEST=testing jest --coverage --coverageReporters=text-lcov | coveralls"
+    "coverage": " npm run pretest && cross-env DB_TEST=testing jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
