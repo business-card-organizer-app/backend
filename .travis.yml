@@ -3,6 +3,7 @@ node_js:
   - "stable"
 install: 
   npm install
+  travis_wait mvn install
 cache:
   directories:
     - "node_modules"
@@ -16,6 +17,7 @@ before_script:
   - psql -c "CREATE USER username WITH PASSWORD 'password';" -U postgres
 after_success:
   - npm run coverage
+install: travis_wait mvn install
 script: npm test
 notifications:
   email: false
