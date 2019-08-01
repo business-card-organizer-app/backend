@@ -10,7 +10,7 @@
     "test": "cross-env DB_TEST=testing jest --forceExit",
     "pretest": "cross-env DB_TEST=testing && npm run migration",
     "test-coverage": "jest --coverage",
-    "coverage": " nyc npm run pretest && cross-env DB_TEST=testing nyc jest --coverage --coverageReporters=text-lcov --forceExit --maxWorkers=10 | coveralls --forceExit --maxWorkers=10"
+    "coverage": " nyc npm run pretest && cross-env DB_TEST=testing nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
