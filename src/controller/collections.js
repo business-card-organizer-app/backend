@@ -33,6 +33,7 @@ module.exports = {
             }
             return response.successHelper(res, 201, collection)
         } catch (error) {
+            console.log(error.message)
             next({
                 message: "Error adding card"
             })
@@ -44,14 +45,12 @@ module.exports = {
             const {
                 id
             } = req.params;
-            console.log(id)
             const collection = await Collections.findUserCollection(id);
             if (!collection) {
                 return response.errorHelper(res, 404, "No cards in your collection")
             }
             return response.successHelper(res, 200, collection)
         } catch (error) {
-            console.log(error.message)
             next({
                 message: "Error getting card in your collections"
             })
