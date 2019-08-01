@@ -9,7 +9,8 @@
     "migration": "npx knex migrate:rollback --env=testing && npx knex migrate:latest --env=testing && npx knex seed:run --env=testing",
     "test": "cross-env DB_TEST=testing jest --forceExit",
     "pretest": "cross-env DB_TEST=testing && npm run migration",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage",
+    "coverage": " npm run pretest && cross-env DB_TEST=testing jest --coverage --coverageReporters=text-lcov --forceExit --maxWorkers=10 | coveralls --forceExit --maxWorkers=10"
   },
   "repository": {
     "type": "git",
